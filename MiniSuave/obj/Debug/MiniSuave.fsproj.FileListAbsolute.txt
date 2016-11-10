@@ -6,3 +6,11 @@ D:\code\MiniSuave\MiniSuave\bin\Debug\FSharp.Core.dll
 D:\code\MiniSuave\MiniSuave\bin\Debug\FSharp.Core.xml
 D:\code\MiniSuave\MiniSuave\obj\Debug\MiniSuave.exe
 D:\code\MiniSuave\MiniSuave\obj\Debug\MiniSuave.pdb
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\MiniSuave.exe.config
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\MiniSuave.XML
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\MiniSuave.exe
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\MiniSuave.pdb
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\FSharp.Core.dll
+C:\source\studyfs\FSharpApplied\MiniSuave\bin\Debug\FSharp.Core.xml
+C:\source\studyfs\FSharpApplied\MiniSuave\obj\Debug\MiniSuave.exe
+C:\source\studyfs\FSharpApplied\MiniSuave\obj\Debug\MiniSuave.pdb

@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MiniSuave", "MiniSuave\Mini
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GithubMockApiServer", "GithubMockApiServer\GithubMockApiServer.fsproj", "{7524AD87-FA5D-4AA3-9929-5DD6D2C60A78}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SuaveRestApi", "SuaveRestApi\SuaveRestApi.fsproj", "{BDAEC526-DFB4-470B-ABAD-12F72F24B437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7524AD87-FA5D-4AA3-9929-5DD6D2C60A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7524AD87-FA5D-4AA3-9929-5DD6D2C60A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7524AD87-FA5D-4AA3-9929-5DD6D2C60A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAEC526-DFB4-470B-ABAD-12F72F24B437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAEC526-DFB4-470B-ABAD-12F72F24B437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAEC526-DFB4-470B-ABAD-12F72F24B437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAEC526-DFB4-470B-ABAD-12F72F24B437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
