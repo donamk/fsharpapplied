@@ -5,13 +5,13 @@ open Suave
 [<EntryPoint>]
 let main argv =
     let personWebPart = rest "people" {
-        GetAll = Db.getPeople
-        GetById = Db.getPerson
-        Create = Db.createPerson
-        Update = Db.updatePerson
-        Delete = Db.deletePerson
-        UpdateById = Db.updatePersonById
-        IsExist = Db.isPersonExist
+        GetAll = PersonDb.getPeople
+        GetById = PersonDb.getPerson
+        Create = PersonDb.createPerson
+        Update = PersonDb.updatePerson
+        Delete = PersonDb.deletePerson
+        UpdateById = PersonDb.updatePersonById
+        IsExist = PersonDb.isPersonExist
     }
 
     startWebServer defaultConfig personWebPart
