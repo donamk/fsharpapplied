@@ -55,35 +55,45 @@ module MusicStoreDb =
         Price : decimal
     }
     
-    let [<Literal>] private DbVendor = Common.DatabaseProviderTypes.POSTGRESQL
-    let [<Literal>] private ResolutionPath = @"D:\code\FSharpApplied\packages\Npgsql.3.1.8\lib\net451\Npgsql.dll"
-    let [<Literal>] ConnectionString = "Host=localhost;Database=musicstore;Username=postgres;Password=postgres"
+    let [<Literal>] private DbVendor = Common.DatabaseProviderTypes.MSSQLSERVER
+//    Common.DatabaseProviderTypes.POSTGRESQL
+    let [<Literal>] private ResolutionPath = ""
+//        = @"D:\code\FSharpApplied\packages\Npgsql.3.1.8\lib\net451\Npgsql.dll"
+    let [<Literal>] ConnectionString = "Data Source=Dev-SQL2014;Initial Catalog=SuaveMusicStore;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=SSPI;"
+//    "Host=localhost;Database=musicstore;Username=postgres;Password=postgres"
     let [<Literal>] IndividualAmount = 1000
     let [<Literal>] UseOptionTypes  = true
     
     type private Sql = SqlDataProvider<DbVendor, ConnectionString, "", ResolutionPath, IndividualAmount, UseOptionTypes, CaseSensitivityChange = Common.CaseSensitivityChange.ORIGINAL>
     type DbContext = Sql.dataContext
-    type AlbumEntity = DbContext.``public.albumsEntity``
+    type AlbumEntity = DbContext.``dbo.AlbumsEntity``
+//    DbContext.``public.albumsEntity``
 
     let private getContext() = Sql.GetDataContext()    
     let firstOrNone s = s |> Seq.tryFind (fun _ -> true)
 
     let mapToAlbum (albumEntity : AlbumEntity) = {
-        AlbumId = albumEntity.Albumid
-        ArtistId = albumEntity.Artistid
-        GenreId = albumEntity.Genreid
+        AlbumId = albumEntity.AlbumId
+        ArtistId = albumEntity.ArtistId
+        GenreId = albumEntity.GenreId
+//        AlbumId = albumEntity.Albumid
+//        ArtistId = albumEntity.Artistid
+//        GenreId = albumEntity.Genreid
         Title = albumEntity.Title
         Price = albumEntity.Price
     }
 
     let getAlbums () = 
-        getContext().Public.Albums
+        getContext().Dbo.Albums
+//        getContext().Public.Albums
         |> Seq.map mapToAlbum
 
     let getAlbumEntityById (ctx : DbContext) id = 
         query { 
-            for album in ctx.Public.Albums do
-            where (album.Albumid = id)
+            for album in ctx.Dbo.Albums do
+            where (album.AlbumId = id)
+//            for album in ctx.Public.Albums do
+//            where (album.Albumid = id)
             select album
         } |> firstOrNone
 
@@ -92,41 +102,39 @@ module MusicStoreDb =
 //
     let createAlbum album =
         let ctx = getContext()
-        let album = ctx.Public.Albums.Create(album.ArtistId, album.GenreId, album.Price, album.Title)
+        let album = ctx.Dbo.Albums.Create(album.ArtistId, album.GenreId, album.Price, album.Title)
+//        let album = ctx.Public.Albums.Create(album.ArtistId, album.GenreId, album.Price, album.Title)
         ctx.SubmitUpdates()
         album |> mapToAlbum
-//
-//    let updateAlbumById id album =
-//        let ctx = getContext()
-//        let albumEntity = getAlbumEntityById ctx album.AlbumId
-//        match albumEntity with
-//        | None -> None
-//        | Some a ->
-//            a.ArtistId <- album.AlbumId
-//            a.GenreId <- album.GenreId
-//            a.Price <- album.Price
-//            a.Title <- album.Title
-//            ctx.SubmitUpdates()
-//            Some album
-//        
-//    let updateAlbum album =
-//        updateAlbumById album.AlbumId album
-//
-//
-//    let deleteAlbum id =
-//        let ctx = getContext()
-//        let albumEntity = getAlbumEntityById ctx id
-//        match albumEntity with
-//        | None -> ()
-//        | Some a ->
-//            a.Delete()
-//            ctx.SubmitUpdates()
-//
-//    let isAlbumExists id =
-//        let ctx = getContext()
-//        let albumEntity = getAlbumEntityById ctx id
-//        match albumEntity with
-//        | None -> false
-//        | Some _ -> true
-//    
-//
+
+    let updateAlbumById id album =
+        let ctx = getContext()
+        let albumEntity = getAlbumEntityById ctx album.AlbumId
+        match albumEntity with
+        | None -> None
+        | Some a ->
+            a.ArtistId <- album.ArtistId
+            a.GenreId <- album.GenreId
+            a.Price <- album.Price
+            a.Title <- album.Title
+            ctx.SubmitUpdates()
+            Some album
+        
+    let updateAlbum album =
+        updateAlbumById album.AlbumId album
+
+    let deleteAlbum id =
+        let ctx = getContext()
+        let albumEntity = getAlbumEntityById ctx id
+        match albumEntity with
+        | None -> ()
+        | Some a ->
+            a.Delete()
+            ctx.SubmitUpdates()
+
+    let isAlbumExists id =
+        let ctx = getContext()
+        let albumEntity = getAlbumEntityById ctx id
+        match albumEntity with
+        | None -> false
+        | Some _ -> true
